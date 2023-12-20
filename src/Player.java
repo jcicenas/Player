@@ -16,6 +16,7 @@ public class Player {
         y = 0;
         z = 0;
         direction = 1;
+        hp = 20;
         playerName = "P" + numplayers;
     }
     public Player(String name, int x, int y, int z){
@@ -59,7 +60,7 @@ public class Player {
     }
 
     public String toString(){
-        String temp = "Name: " + playerName + "\n" + "Coordinates: " + x + " " + y + " " + z + "\n" + "Health: " + hp + "\n" + "Direction: " + direction;
+        String temp = "Name: " + playerName + "\n" + "Coordinates: " + x + " " + y + " " + z + "\n" + "Health: " + hp + "\n" + "Direction: " + direction + "\n";
         return temp;
 
     }
@@ -86,16 +87,21 @@ public class Player {
         }else if(direction == 6){
             z = z - units;
         }
+        System.out.println("Player moved in direction " + direction + " " + units + "units" );
     }
     public void teleport(int x, int y, int z){
         this.x = x;
         this.y = y;
         this.z = z;
+
+        System.out.println("Player teleported to " + x + " " + y + " " + z);
     }
     public void teleport(Player playerName){
         x = playerName.getX();
         y = playerName.getY();
         z = playerName.getZ();
+
+        System.out.println("Player teleported to " + playerName.getName());
     }
     public void attack(Player playerName, int damage){
         playerName.hp = playerName.hp - damage;
@@ -104,6 +110,8 @@ public class Player {
         }else{
             this.setHp(hp + (damage/2));
         }
+
+        System.out.println("Player attacked " + playerName.getName() + " for " + damage + " damage");
     }
     public double getDistance(int x, int y, int z){
         return (Math.pow(x - this.x, 2.0) + Math.pow(y - this.y, 2.0) + Math.pow(z - this.z, 2.0));
